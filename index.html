@@ -12,8 +12,296 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* --- index.css --- */
+        :root {
+            /* Colors - Dark Premium Theme */
+            --bg-body: #0a0e17;
+            --bg-glass: rgba(30, 41, 59, 0.7);
+            --bg-glass-hover: rgba(51, 65, 85, 0.8);
+
+            --primary: #6366f1;
+            /* Indigo 500 */
+            --primary-hover: #4f46e5;
+            --accent: #ec4899;
+            /* Pink 500 */
+
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+
+            --border-glass: rgba(255, 255, 255, 0.08);
+
+            /* Spacing */
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 2rem;
+            --space-xl: 4rem;
+
+            /* Radius */
+            --radius-md: 12px;
+            --radius-lg: 20px;
+
+            /* Shadows */
+            --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-body);
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+            padding-bottom: var(--space-xl);
+        }
+
+        .glass-panel {
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-glass);
+            margin-bottom: var(--space-lg);
+            padding: var(--space-lg);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .glass-panel:hover {
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+            border: none;
+            outline: none;
+        }
+
+        /* --- styles.css --- */
+        /* Main Header */
+        #main-header {
+            background: rgba(10, 14, 23, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-glass);
+            padding: var(--space-md) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-bottom: var(--space-xl);
+        }
+
+        .nav-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--text-main);
+        }
+
+        /* Thread Styles */
+        .thread-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: var(--space-md);
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+        }
+
+        .author-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: block;
+        }
+
+        .post-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .badge {
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-left: var(--space-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .thread-title {
+            font-size: 2rem;
+            margin-bottom: var(--space-md);
+            background: linear-gradient(90deg, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .thread-content {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+
+        .thread-footer {
+            margin-top: var(--space-lg);
+            display: flex;
+            gap: var(--space-md);
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--primary);
+        }
+
+        /* Comments Section */
+        .section-title {
+            font-size: 1.4rem;
+            margin-bottom: var(--space-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .comment-count {
+            background: var(--bg-body);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .comment-form {
+            background: rgba(0, 0, 0, 0.2);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        textarea {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            color: var(--text-main);
+            font-family: inherit;
+            resize: vertical;
+            min-height: 100px;
+            font-size: 1rem;
+            margin-bottom: var(--space-md);
+            transition: border-color 0.2s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* Comment Item */
+        .comment-item {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .comment-content-wrapper {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.03);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            border-top-left-radius: 0;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-sm);
+        }
+
+        .comment-text {
+            color: #e2e8f0;
+        }
+    </style>
 </head>
 
 <body>
